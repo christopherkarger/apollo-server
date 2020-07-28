@@ -2,7 +2,6 @@ const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
-const jwt = require("jsonwebtoken");
 const context = require("./context");
 
 // Start Apollo Server1

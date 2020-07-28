@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 const context = ({ req }) => {
   const noUser = { user: false };
   const authHeader = req.headers.authorization;
@@ -11,16 +13,8 @@ const context = ({ req }) => {
     return noUser;
   }
   let decodedToken;
-  let tokenError;
   try {
-    decodedToken = jwt.verify(token, "secretKey", (err, decoded) => {
-      if (err) {
-        tokenError = true;
-      }
-    });
-    if (tokenError) {
-      return noUser;
-    }
+    decodedToken = jwt.verify(token, "secretKey");
   } catch (err) {
     return noUser;
   }
