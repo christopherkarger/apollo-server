@@ -5,7 +5,7 @@ const resolvers = require("./graphql/resolvers");
 const jwt = require("jsonwebtoken");
 const context = require("./context");
 
-// Start Apollo Server
+// Start Apollo Server1
 const server = new ApolloServer({
   cors: true,
   typeDefs,
