@@ -1,11 +1,11 @@
-const bcrypt = require("bcryptjs");
-const User = require("../../models/user");
-const jwt = require("jsonwebtoken");
+import { bcrypt } from "bcryptjs";
+import { User } from "../../models/user";
+import { sign } from "jsonwebtoken";
 
-module.exports = {
+export const userResolver = {
   Query: {
     login: async (parent, args, context) => {
-      const user = await User.findOne({ email: args.email });
+      const user: any = await User.findOne({ email: args.email });
 
       if (!user) {
         throw new Error("User not found");
@@ -16,13 +16,9 @@ module.exports = {
         throw new Error("Password is not correct");
       }
 
-      const token = jwt.sign(
-        { userId: user.id, email: user.email },
-        "secretKey",
-        {
-          expiresIn: "1h",
-        }
-      );
+      const token = sign({ userId: user.id, email: user.email }, "secretKey", {
+        expiresIn: "1h",
+      });
 
       return {
         userId: user.id,

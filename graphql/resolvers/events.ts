@@ -1,7 +1,8 @@
-const Event = require("../../models/event");
-const { user } = require("./merge");
+import { Event } from "../../models/event";
+import { User } from "../../models/user";
+import { loadUser } from "./merge";
 
-module.exports = {
+export const eventsResolver = {
   Query: {
     events: async (parent, args, context) => {
       if (!context.user) {
@@ -9,10 +10,10 @@ module.exports = {
       }
       try {
         const events = await Event.find();
-        return events.map((event) => {
+        return events.map((event: any) => {
           return {
             ...event._doc,
-            creator: () => user(event._doc.creator),
+            creator: () => loadUser(event._doc.creator),
           };
         });
       } catch (err) {
@@ -33,13 +34,13 @@ module.exports = {
         creator: "5f17edd3d7770865ebc5644c",
       });
       try {
-        const savedEvent = await event.save();
+        const savedEvent: any = await event.save();
         const createdEvent = {
           ...savedEvent._doc,
-          creator: user.bind(this, savedEvent._doc.creator),
+          creator: loadUser.bind(this, savedEvent._doc.creator),
         };
 
-        const userById = await User.findById("5f17edd3d7770865ebc5644c");
+        const userById: any = await User.findById("5f17edd3d7770865ebc5644c");
         if (!userById) {
           throw new Error("User does not exits");
         }

@@ -1,8 +1,8 @@
-const userResolver = require("./user");
-const bookingsResolver = require("./bookings");
-const eventsResolver = require("./events");
+import { userResolver } from "./user";
+import { bookingsResolver } from "./bookings";
+import { eventsResolver } from "./events";
 
-module.exports = {
+export const resolvers = {
   Query: {
     ...userResolver.Query,
     ...bookingsResolver.Query,

@@ -1,6 +1,6 @@
-const { gql } = require("apollo-server");
+import gql from "graphql-tag";
 
-module.exports = gql`
+export const typeDefs = gql`
   type Booking {
     _id: ID!
     event: Event!

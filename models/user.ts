@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
-
-const Schema = mongoose.Schema;
+import { Schema, model } from "mongoose";
 
 const eventSchema = new Schema({
   email: {
@@ -20,4 +18,4 @@ const eventSchema = new Schema({
   ],
 });
 
-module.exports = mongoose.model("User", eventSchema);
+export const User = model("User", eventSchema);
