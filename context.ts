@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
+import { verify } from "jsonwebtoken";
 
-const context = ({ req }) => {
+export default ({ req }) => {
   const noUser = { user: false };
   const authHeader = req.headers.authorization;
 
@@ -14,7 +14,7 @@ const context = ({ req }) => {
   }
   let decodedToken;
   try {
-    decodedToken = jwt.verify(token, "secretKey");
+    decodedToken = verify(token, "secretKey");
   } catch (err) {
     return noUser;
   }
@@ -25,5 +25,3 @@ const context = ({ req }) => {
     user: decodedToken.userId,
   };
 };
-
-module.exports = context;
