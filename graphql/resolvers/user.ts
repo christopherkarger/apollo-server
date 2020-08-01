@@ -45,7 +45,7 @@ export const userResolver = {
           password: pwd,
         });
 
-        const savedUser = await user.save();
+        const savedUser: any = await user.save();
         return { ...savedUser._doc, password: null };
       } catch (err) {
         throw err;
